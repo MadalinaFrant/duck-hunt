@@ -21,6 +21,8 @@ namespace object_2D
     Mesh* CreateCircle(const std::string &name, glm::vec3 center, 
                         float radius, glm::vec3 color, bool fill = false);
 
-    glm::vec3 triangleCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale);
+    glm::vec3 TriangleCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale);
+
+    glm::vec3 SquareCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale);
 
 }
