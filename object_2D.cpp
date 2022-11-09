@@ -118,7 +118,7 @@ Mesh* object_2D::CreateCircle(
     return circle;
 }
 
-glm::vec3 object_2D::triangleCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale) 
+glm::vec3 object_2D::TriangleCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale) 
 {
     float x1 = leftBottomCorner.x;
     float x2 = leftBottomCorner.x + length * scale.x;
@@ -136,3 +136,18 @@ glm::vec3 object_2D::triangleCenter(glm::vec3 leftBottomCorner, float length, gl
     return center;
 }
 
+glm::vec3 object_2D::SquareCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale)
+{
+    float x1 = leftBottomCorner.x;
+    float x2 = leftBottomCorner.x + length * scale.x;
+
+    float y1 = leftBottomCorner.y;
+    float y2 = leftBottomCorner.y + length * scale.y;
+
+    glm::vec3 center;
+    center.x = (x1 + x2) / 2;
+    center.y = (y1 + y2) / 2;
+    center.z = 0;
+
+    return center;
+}
