@@ -8,19 +8,22 @@
 
 namespace object_2D
 {
-
-    // Create square with given bottom left corner, length and color
+    // Creeaza un patrat cu coltul de stanga jos, lungimea si culoarea date
     Mesh* CreateSquare(const std::string &name, glm::vec3 leftBottomCorner, 
                         float length, glm::vec3 color, bool fill = false);
 
-    // Create triangle with given bottom left corner, length and color
+    // Creeaza un triunghi cu coltul de stanga jos, lungimea si culoarea date
     Mesh* CreateTriangle(const std::string &name, glm::vec3 leftBottomCorner, 
                         float length, glm::vec3 color, bool fill = false);
 
-    // Create circle with given center, radius and color
+    // Creeaza un cerc cu centrul, raza si culoarea date
     Mesh* CreateCircle(const std::string &name, glm::vec3 center, 
                         float radius, glm::vec3 color, bool fill = false);
 
-    glm::vec3 triangleCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale);
+    // Intoarce centrul triunghiului
+    glm::vec3 TriangleCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale);
+
+    // Intoarce centrul patratului/dreptunghiului
+    glm::vec3 SquareCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale);
 
 }

@@ -13,14 +13,12 @@ Mesh* object_2D::CreateSquare(
     glm::vec3 color,
     bool fill)
 {
-    glm::vec3 corner = leftBottomCorner;
-
     std::vector<VertexFormat> vertices =
     {
-        VertexFormat(corner, color),
-        VertexFormat(corner + glm::vec3(length, 0, 0), color),
-        VertexFormat(corner + glm::vec3(length, length, 0), color),
-        VertexFormat(corner + glm::vec3(0, length, 0), color)
+        VertexFormat(leftBottomCorner, color),
+        VertexFormat(leftBottomCorner + glm::vec3(length, 0, 0), color),
+        VertexFormat(leftBottomCorner + glm::vec3(length, length, 0), color),
+        VertexFormat(leftBottomCorner + glm::vec3(0, length, 0), color)
     };
 
     std::vector<unsigned int> indices = { 0, 1, 2, 3 };
@@ -45,13 +43,11 @@ Mesh* object_2D::CreateTriangle(
     glm::vec3 color,
     bool fill)
 {
-    glm::vec3 corner = leftBottomCorner;
-
     std::vector<VertexFormat> vertices =
     {
-        VertexFormat(corner, color),
-        VertexFormat(corner + glm::vec3(length, 0, 0), color),
-        VertexFormat(corner + glm::vec3(length / 2, length, 0), color)
+        VertexFormat(leftBottomCorner, color),
+        VertexFormat(leftBottomCorner + glm::vec3(length, 0, 0), color),
+        VertexFormat(leftBottomCorner + glm::vec3(length / 2, length, 0), color)
     };
 
     std::vector<unsigned int> indices = { 0, 1, 2 };
@@ -76,9 +72,9 @@ Mesh* object_2D::CreateCircle(
     std::vector<VertexFormat> vertices;
     vertices.push_back(VertexFormat(center, color));
 
-    float inc = 2.0f * M_PI / 360;
+    float inc = (2 * M_PI) / 360;
 
-    for (float angle = 0.0f; angle <= 2.0f * M_PI; angle += inc)
+    for (float angle = 0.0f; angle <= 2 * M_PI; angle += inc)
     {
         vertices.push_back(VertexFormat(
             glm::vec3(radius * cos(angle) + center.x, radius * sin(angle) + center.y, 0), 
@@ -90,16 +86,11 @@ Mesh* object_2D::CreateCircle(
     Mesh* circle = new Mesh(name);
 
     if (!fill) {
-
         circle->SetDrawMode(GL_LINE_LOOP);
 
-        for (int i = 1; i < vertices.size() - 1; i += 2) {
+        for (int i = 1; i <= vertices.size() - 1; i++) {
             indices.push_back(i);
-            indices.push_back(i + 1);
         }
-
-        indices.push_back(vertices.size() - 1);
-        indices.push_back(1);
 
     } else {
 
@@ -108,7 +99,6 @@ Mesh* object_2D::CreateCircle(
             indices.push_back(0);
             indices.push_back(i + 1);
         }
-
         indices.push_back(vertices.size() - 1);
         indices.push_back(0);
         indices.push_back(1);
@@ -118,15 +108,19 @@ Mesh* object_2D::CreateCircle(
     return circle;
 }
 
-glm::vec3 object_2D::triangleCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale) 
+glm::vec3 object_2D::TriangleCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale) 
 {
+    // (x1, y1) -> colt stanga jos
+    // (x2, y2) -> colt dreapta jos
+    // (x3, y3) -> varf triunghi
+
     float x1 = leftBottomCorner.x;
-    float x2 = leftBottomCorner.x + length * scale.x;
-    float x3 = leftBottomCorner.x + length * scale.x / 2;
+    float x2 = leftBottomCorner.x + (length * scale.x);
+    float x3 = leftBottomCorner.x + (length * scale.x) / 2;
 
     float y1 = leftBottomCorner.y;
     float y2 = leftBottomCorner.y;
-    float y3 = leftBottomCorner.y + length * scale.y;
+    float y3 = leftBottomCorner.y + (length * scale.y);
 
     glm::vec3 center;
     center.x = (x1 + x2 + x3) / 3;
@@ -136,3 +130,23 @@ glm::vec3 object_2D::triangleCenter(glm::vec3 leftBottomCorner, float length, gl
     return center;
 }
 
+glm::vec3 object_2D::SquareCenter(glm::vec3 leftBottomCorner, float length, glm::vec3 scale)
+{
+    // (x1, y1) -> colt stanga jos
+    // (x2, y1) -> colt dreapta jos
+    // (x1, y2) -> colt stanga sus
+    // (x2, y2) -> colt dreapta sus
+
+    float x1 = leftBottomCorner.x;
+    float x2 = leftBottomCorner.x + (length * scale.x);
+
+    float y1 = leftBottomCorner.y;
+    float y2 = leftBottomCorner.y + (length * scale.y);
+
+    glm::vec3 center;
+    center.x = (x1 + x2) / 2;
+    center.y = (y1 + y2) / 2;
+    center.z = 0;
+
+    return center;
+}

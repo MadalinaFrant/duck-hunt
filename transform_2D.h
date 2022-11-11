@@ -5,7 +5,7 @@
 
 namespace transform_2D
 {
-    // Translate matrix
+    // Matricea de translatie
     inline glm::mat3 Translate(float translateX, float translateY)
     {
         return glm::transpose(
@@ -16,7 +16,7 @@ namespace transform_2D
 
     }
 
-    // Scale matrix
+    // Matricea de scalare
     inline glm::mat3 Scale(float scaleX, float scaleY)
     {
         return glm::transpose(
@@ -27,7 +27,7 @@ namespace transform_2D
 
     }
 
-    // Rotate matrix
+    // Matricea de rotatie
     inline glm::mat3 Rotate(float radians)
     {
         return glm::transpose(
@@ -38,4 +38,4 @@ namespace transform_2D
 
     }
 
-}   // namespace transform_2D
+}

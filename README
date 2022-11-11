@@ -1,0 +1,85 @@
+Tema 1 EGC - Frant Madalina 334CB
+
+Pentru rezolvarea acestei teme am folosit drept suport scheletul 
+laboratorului 3.
+
+In cadrul fisierului "transform_2D.h" au fost implementate matricile 
+de translatie, scalare si rotatie.
+
+In cadrul fisierului "object_2D.h" au fost definite, iar in "object_2D.cpp" 
+implementate functii de creare a obiectelor geometrice (patrat, triunghi, cerc) 
+prin vertecsi si indecsi, si functii de calculare a centrului unui triunghi sau 
+dreptunghi.
+
+Fisierul header "tema1.h" defineste clasa Tema1 cu toate functiile si 
+variabilele necesare.
+
+In cadrul fisierului "tema1.cpp":
+
+In functia Init se initializeaza valori, se seteaza dimensiunile componentelor 
+ratei si se creeaza componentele necesare construirii scenei. 
+
+In functia FrameStart se seteaza culoarea fundalului corepunzatoare si se 
+seteaza viewport-ul.
+
+In functia Update: se contorizeaza timpul pe ecran al ratei curente si se 
+actualizeaza starea acesteia. Daca rata este aflata in starea activa si 
+timpul pe ecran al acesteia depaseste 5 secunde sau nu mai sunt gloante 
+disponibile, aceasta va tranzitiona catre starea evadata, pierzand o viata. 
+Daca rata se afla in starea evadata sau impuscata si iese din ecran (in 
+partea de sus sau de jos, corespunzator) urmatoarea stare va fi "newDuck", 
+deci va aparea o noua rata pe ecran. In cazul in care s-a atins scorul 
+maxim sau jucatorul a ramas fara vieti, jocul se va incheia. Daca starea 
+curenta este "newDuck", se vor calcula toate valorile necesare apeland 
+functia CalculateValues. 
+
+Functia CalculateValues genereaza valorile necesare, precum punctul de 
+aparitie, unghiul pentru reprezentarea directiei si puncte de referinta 
+ale obiectelor componente. 
+
+Daca in functia Update starea curenta este activa, se va calcula unghiul 
+urmatoarei directii, prin functia CalculateDirAngle. 
+
+Definind coordonatele translatiei in vederea miscarii pe directia data de 
+unghi, multimea directiilor poate fi vazuta drept multimea vectorilor raza 
+dintr-un cerc, cu sensul dinspre centru spre margine. Astfel, directia 
+dreapta sus va exista in cadranul 1, stanga sus in cadranul 2, stanga jos 
+in cadranul 3, iar dreapta jos in cadranul 4. 
+
+Functia CalculateDirAngle va genera un nou unghi dupa ciocnirea de un 
+perete, astfel incat directia sa se reflecte. 
+
+Functia RotateInRefToPoint realizeaza o rotatie in jurul unui punct 
+de referinta dat. 
+
+In cadrul functiei RenderDuck se defineste matricea parinte asupra 
+careia sa aplica translatia cu coordonatele tx si ty obtinute (in 
+functie de unghi), ce va fi aplicata fiecarei componente pentru o 
+miscare uniforma. Se deseneaza rata apeland functiile de desenare a 
+fiecarei componente. 
+
+In cadrul functiilor de desenare a fiecarei componente se definesc 
+transformarile necesare obtinerii pozitionarii si miscarii acestora.
+
+Pentru rotatia ratei in functie de directie se roteste fiecare 
+componenta in jurul centrului corpului. Unghiul de rotatie va fi 
+unghiul de directie - 90 de grade, intrucat initial rata a fost creata
+cu orientarea in sus (unghi de directie de 90 de grade).
+
+Se randeaza in scena si vietile, gloantele si scorul curent, in functie 
+de valoarea curenta a acestora.
+
+In cadrul functiei RenderBox se definesc coordonatele dreptunghiului 
+ce va incadra rata pentru detectarea coliziunilor. 
+
+Functia IsInBox verifica daca coordonatele primite ca parametru se afla 
+in interiorul dreptunghiului definit. 
+
+In functia OnMouseBtnPress, in momentul tintirii, se pierde un glont.
+Pentru a putea verifica daca a fost nimerit dreptunghiul, intrucat 
+sistemul de coordonate al mouse-ului are axa oy "inversata", se aduce 
+coordonata y in spatiul de coordonate general. Se verifica daca a avut loc 
+o coliziune, prin functia IsInBox, in caz pozitiv incrementand scorul cu 
+valoarea corespunzatoare si trecand in starea urmatoare. 
+
+
