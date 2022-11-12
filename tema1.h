@@ -27,21 +27,52 @@ namespace m1
 			void OnMouseScroll(int mouseX, int mouseY, int offsetX, int offsetY) override;
 			void OnWindowResize(int width, int height) override;
 
-			float genRandFloat(float min, float max);
+			void DefineObjects();
+			float GenRandFloat(float min, float max);
+			void CalculateValues();
+			void CalculateDirAngle();
+			void RotateInRefToPoint(glm::vec3 point, glm::vec3 refPoint, float angle);
+			void RenderDuck();
+			void RenderEye();
+			void RenderLine(int sense);
+			void RenderCross();
+			void RenderBeak();
+			void RenderHead();
+			void RenderBody();
+			void RenderWing(int sense);
+			void RenderGrass();
+			void RenderLives();
+			void RenderBullets();
+			void RenderScore();
+			bool IsInBox(int mouseX, int mouseY);
 
 		protected:
 			glm::ivec2 resolution;
 			glm::mat3 modelMatrix, parentMatrix;
-			float bodyLength, wingLength, headRadius, beakLength;
+			float bodyLength, wingLength, headRadius, beakLength, eyeRadius, lineLength;
 			glm::vec3 bodyScale, bodyCorner, bodyCenter;
 			glm::vec3 wingScale, wingCorner, wingCenter;
 			glm::vec3 headScale, headCenter;
 			glm::vec3 beakScale, beakCorner, beakCenter;
+			glm::vec3 eyeScale, eyeCenter;
+			glm::vec3 lineScale, lineCorner, lineCenter;
+			float grassLength, lifeRadius, bulletLength;
+			glm::vec3 grassScale, lifeScale, bulletScale;
 			float tx, ty;
-			float angStep;
-			int invRotation, invX, invY;
+			float wingRotationAngle;
+			int wingRotationSense;
+			glm::vec3 spawnPoint;
 			float dirAngle;
-			float x;
+			int nrDucks;
+			std::string currState;
+			float currDuckTime;
+			float speed, initSpeed, speedInc;
+			float score, maxScore, scoreInc, scorePerDuck;
+			glm::vec3 scoreScale;
+			int lives, bullets, bulletsShot;
+			glm::vec3 boxCorner;
+			float duckHeight, duckWidth;
+			bool bossFight;
 	};
 
 }
